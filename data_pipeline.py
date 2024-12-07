@@ -1,7 +1,7 @@
 
 import json
 
-# Fonction pour trouver les mentions de chaque médicament et générer le graphe dans un fichier JSON en sortie
+# Fonction pour créer lr graphe dans un fichier JSON
 def get_mentions_graph(df_list, titles, drugs_list, sources, output_file):
     mentions_graph = {}
     for df, title, source in zip(df_list, titles, sources):
@@ -22,7 +22,7 @@ def get_mentions_graph(df_list, titles, drugs_list, sources, output_file):
 
     print(f"Fichier JSON généré : {output_file}")
 
-# Fonction pour charger le graphe des mentions depuis un fichier JSON
+# Fonction pour charger le graphe depuis un fichier JSON
 def load_mentions_graph(file_path):
     with open(file_path, 'r') as json_file:
         return json.load(json_file)

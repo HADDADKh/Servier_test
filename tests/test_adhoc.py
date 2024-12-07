@@ -1,7 +1,7 @@
 import unittest
 from adhoc import journal_with_most_drug_mentions, drugs_in_same_pubmed_journals
 
-class TestAdhocProcessing(unittest.TestCase):
+class TestAdhocProcess(unittest.TestCase):
 
     def setUp(self):
         self.mentions_graph = {

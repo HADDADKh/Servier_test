@@ -2,9 +2,9 @@ import unittest
 import pandas as pd
 from cleaning import format_date, clean_encoding, clean_spaces
 
-class TestCleaning(unittest.TestCase):
+class TestClean(unittest.TestCase):
 
-    def test_clean_text_columns(self):
+    def test_clean_encoding(self):
         df = pd.DataFrame({'title': ['Here a test \xc3\xb1 Laminectomy']})
         df_cleaned = clean_encoding(df)
         expected_output = ['Here a test Ã± Laminectomy']

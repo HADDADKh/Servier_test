@@ -1,0 +1,31 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - test  # ou la branche par défaut de votre projet
+  pull_request:
+    branches:
+      - test  # ou la branche par défaut de votre projet
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Vous pouvez changer ça en fonction de votre environnement (macos-latest, windows-latest)
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # Cette action clone votre code
+
+    - name: Set up Python
+      uses: actions/setup-python@v4  # Installe Python sur l'environnement CI
+      with:
+        python-version: '3.8'  # Utilisez la version de Python que vous souhaitez (ex : 3.8, 3.9, etc.)
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Installe les dépendances listées dans requirements.txt
+
+    - name: Run tests
+      run: |
+        python3 -m unittest discover -s tests  # Lance les tests dans le dossier 'tests'

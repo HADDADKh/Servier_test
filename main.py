@@ -6,7 +6,7 @@ from data_pipeline import get_mentions_graph, load_mentions_graph
 from adhoc import journal_with_most_drug_mentions, drugs_in_same_pubmed_journals
 
 def main():
-    print("Starting the data processing pipeline...")
+    print("Démarrage du pipeline de traitement ..")
 
     # Charger les fichiers de données
     drugs_df = pd.read_csv('sources/drugs.csv')
@@ -16,7 +16,7 @@ def main():
     with open('sources/pubmed.json', 'r') as f:
         pubmed_json_df = pd.DataFrame(json.load(f))
 
-    # Data cleansing
+    # Data clean
 
     clinical_trials_df = format_date(clinical_trials_df, 'date')
     pubmed_csv_df = format_date(pubmed_csv_df, 'date')
@@ -43,8 +43,8 @@ def main():
     journal, count = journal_with_most_drug_mentions(mentions_graph)
     print(f"Le journal qui mentionne le plus de médicaments est : {journal} avec {count} médicaments mentionnés.")
 
-    # Exemple pour trouver d'autres médicaments mentionnés dans les mêmes journaux que "TETRACYCLINE" (uniquement PubMed)
-    drug = 'TETRACYCLINE'
+    # Exemple pour trouver d'autres médicaments mentionnés dans les mêmes journaux que "TETRACYCLINE" et uniquement PubMed.
+    drug = 'ETHANOL'
     other_mentioned_drugs = drugs_in_same_pubmed_journals(drug, mentions_graph)
     print(f"Les médicaments mentionnés dans les mêmes journaux que {drug} (uniquement PubMed) sont : {other_mentioned_drugs}")
 

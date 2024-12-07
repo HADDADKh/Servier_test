@@ -4,12 +4,12 @@
 Ce projet développe un pipeline de traitement de données en Python, conçu pour nettoyer, transformer et analyser les mentions de médicaments issues de publications scientifiques et d'essais cliniques. Il s'organise autour de plusieurs fichiers Python, décrits en détail dans les sections suivantes.
 
 Les étapes du projet incluent :
-1. **Data cleansing** : 
+1. **Data clean** : 
 Appliquer un ensemble de traitement pour nettoyer et uniformiser la donnée :
 
     **1.1** Standardisation du format des dates: les dates dans les fichiers ont plusieurs format différents donc il faut standariser le format pour pouvoir les traiter.
 
-    **1.2** Traitement des problèmes d'encodage : \xc3\x28".
+    **1.2** Traitement des problèmes d'encodage : "\xc3\x28".
 
     **1.3** Suppression des espaces non nécéssaires.
 
@@ -22,19 +22,22 @@ Depuis le json produit par la data pipeline:
 **•** Extraire le nom du journal qui mentionne le plus de médicaments différents.
 
 **•** Pour un médicament donné, trouver l’ensemble des médicaments mentionnés par les mêmes
-journaux r
+journaux.
 
-## Organisation du projet
+## Structure du projet
 
 Le dossier **sources** contient les fichiers de données JSON et CSV et le dossier **tests** contient les tests unitaires.
+- **`Github CI`** : Lance un workflow de test lorsqu'un push ou un merge est effectué sur la branche test.
 - **`clean.py`** : Contient les fonctions de cleansing citées dans la partie précédente.
 - **`data_pipeline.py`** : Contient la partie de la génération du graphe de mentions.
 - **`adhoc.py`** : Contient la partie des traitements ad-hoc.
 - **`main.py`** : Le point d'entrée principal du projet qui orchestre l'appel des autres fichiers.
-- **`requirements.txt`** : Contient les dépendances du projet.
+- **`requirements.txt`** : Contient les dépendances du projet, ici pandas.
 
 
-## Installation des dépendances nécessaires
+## Installation des dépendances
+
+- pandas
 
 pip3 install -r requirements.txt
 
@@ -53,14 +56,15 @@ python3 -m unittest discover -s tests
 
 ![alt text](<Screenshot 2024-12-07 at 10.16.41.png>)
 
-## Pour aller plus loin 
+## Amélioration
 
-Points à envisager pour adapter le code à de grands volumes de données :
+Points pour adapter le code à de grands volumes de données :
 
+- **Deployement sur cloud** Déployer ce projet sur Google Cloud Platform pour bénéficier d'une meilleure performance en matière de stockage et d'exécution
 
 - **Partitionnement des données**  si la donnée est énorme cela peut être utile de partitionner par date par exemple ou autre(s) colonne(s) pertinentes
 
-- **Orchestration des pipelines** Déployer ce projet sur Google Cloud Platform pour bénéficier d'une meilleure performance en matière de stockage et d'exécution
+- **Orchestration des pipeline** avec airflow ou dataflow, workflow pour organiser et automatiser l'éxécution les taches.
 
 - **Parallélisation** du traitement de données avec des threads.
 
@@ -68,22 +72,24 @@ Points à envisager pour adapter le code à de grands volumes de données :
 
 - **Intégration continue (CI)** Joue un rôle essentiel lors des étapes de push et de merge dans le processus de développement. Elle permet d'automatiser les tests et les vérifications sur le code nouvellement ajouté, garantissant ainsi sa qualité et sa conformité avec les normes du projet. 
 
-## SQL
+## Partie SQL
 
 
-**Première partie du test**
+**Première partie du test SQL**
+
 
 SELECT date, SUM(prod_price*prod_qty) AS total 
 
 FROM TRANSACTIONS
 
-WHERE date BETWEEN '2019-01-01' AND '2020-12-31'
+WHERE date BETWEEN '2019-01-01' AND '2019-12-31'
 
 GROUP BY date
 
 ORDER BY date ASC
 
-**Seconde partie du test**
+**Seconde partie du test SQL**
+
 
 SELECT
 

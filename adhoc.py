@@ -7,12 +7,12 @@ def journal_with_most_drug_mentions(mentions_graph):
         for mention in mentions:
             journal = mention['journal']
             if journal not in journal_dict:
-                journal_dict[journal] = set()  # pour l'unicité des éléments
+                journal_dict[journal] = set()
             journal_dict[journal].add(drug)
     
     max_drugs_journal = max(journal_dict, key=lambda j: len(journal_dict[j]))
 
-    #we can use these line to replace lambda
+    #On peut utiliser ces lignes pour remplacer lambda
     #max_count = 0
     #for journal, drugs in journal_dict.items():
     #drug_count = len(drugs)
@@ -22,7 +22,8 @@ def journal_with_most_drug_mentions(mentions_graph):
     
     return max_drugs_journal, len(journal_dict[max_drugs_journal])
 
-# Fonction pour trouver les autres médicaments mentionnés dans les mêmes journaux PubMed mais pas dans Clinical Trials
+# Fonction pour trouver les autres médicaments mentionnés dans les mêmes journaux PubMed 
+# mais pas dans Clinical Trials
 def drugs_in_same_pubmed_journals(drug, mentions_graph):
     pubmed_journals = set()
     if drug in mentions_graph:

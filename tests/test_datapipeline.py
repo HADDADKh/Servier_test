@@ -4,7 +4,7 @@ from data_pipeline import get_mentions_graph, load_mentions_graph
 import json
 import os
 
-class TestDataPipeline(unittest.TestCase):
+class TestPipeline(unittest.TestCase):
 
     def setUp(self):
         self.drugs_list = ['Betamethasone', 'Atropine']
@@ -18,7 +18,7 @@ class TestDataPipeline(unittest.TestCase):
         self.titles = ['title']
         self.sources = ['PubMed']
 
-    def test_get_mentions_graph(self):
+    def test_get_mentions(self):
         output_file = 'test_mentions_graph.json'
         get_mentions_graph(self.df_list, self.titles, self.drugs_list, self.sources, output_file)
         self.assertTrue(os.path.exists(output_file))
